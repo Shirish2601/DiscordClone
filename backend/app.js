@@ -6,6 +6,13 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const HTTPError = require("./models/HTTPError");
+const ejsMate = require("ejs-mate");
+const path = require("path");
+
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+
+app.set("views", path.join(__dirname, "../", "views"));
 
 app.use(bodyParser.json());
 app.use(cors());

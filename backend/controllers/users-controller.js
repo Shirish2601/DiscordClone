@@ -1,8 +1,9 @@
 const HTTPError = require("../models/HTTPError");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
-const user = require("../models/user");
+const path = require("path");
 
+const VIEWS_PATH = path.join(__dirname, "../../", "views");
 // const DUMMY_USERS = [
 //   {
 //     id: "u1",
@@ -134,5 +135,26 @@ const loginUser = async (req, res, next) => {
   res.json({ message: "Logged in!" });
 };
 
+const getAllUsers = async (req, res, next) => {
+  let users;
+  let myUser;
+  try {
+    users = await User.find();
+    users.forEach((user) => {
+      if (user.email === "hadpadshirish@gmail.com") {
+        myUser = user;
+      }
+    });
+  } catch (err) {
+    const error = new HTTPError(
+      "Fetching users failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+  res.render(VIEWS_PATH + "\\user\\channels", { user: myUser });
+};
+
+exports.getAllUsers = getAllUsers;
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;
