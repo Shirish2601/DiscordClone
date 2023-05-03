@@ -1,0 +1,100 @@
+.channel_textarea {
+  background-color: #36383e;
+}
+.channel_channel-title p {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.channel_channel-title {
+  display: flex;
+  background-color: #2b2d31;
+  padding: 9px 1em;
+  opacity: 0.97;
+  flex-direction: row;
+  align-items: center;
+  gap: 1100px;
+}
+.icon-members {
+  color: #808183;
+}
+.icon-members:hover {
+  color: #ffffff;
+}
+.channel_textarea-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+}
+#msgarea {
+  position: absolute;
+  bottom: 18px;
+  resize: none;
+  width: 1200px;
+  height: 40px;
+  background-color: #4a4c51;
+  padding: 8px 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+}
+#msgarea::placeholder {
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+#msgarea:focus {
+  outline: none;
+}
+.channel_msg-content {
+  padding: 10px 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.channel_msg-content span {
+  display: inline-block;
+}
+.channel_msg-content img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+.channel_userInfo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.channel_info {
+  display: flex;
+  align-items: center;
+  margin-top: -22px;
+  margin-left: 10px;
+}
+.channel_nameUser {
+  color: white;
+}
+.channel_timeofmsg {
+  display: inline-block;
+  font-size: 10px;
+  margin-left: 10px;
+  color: #8d8d8d;
+}
+.channel_actualmsg {
+  width: 1100px;
+  color: white;
+  margin-left: 70px;
+  margin-top: -25px;
+  font-weight: 300;
+  word-spacing: 2px;
+}
+.channel_msg-content:hover {
+  background-color: #2b2d31;
+}
+.channel_msg-wrapper {
+  overflow-y: scroll;
+  max-height: 600px;
+}

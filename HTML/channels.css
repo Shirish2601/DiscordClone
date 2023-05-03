@@ -1,0 +1,156 @@
+:root {
+  color-scheme: dark;
+  --servers: #1e1f22;
+  --channels: #2b2d31;
+  font-family: "Poppins", sans-serif;
+}
+.channels {
+  background: var(--channels);
+  margin-left: 4em;
+  width: 17%;
+  height: 100%;
+  position: fixed;
+  user-select: none;
+}
+.channel {
+  display: flex;
+  gap: 5px;
+  color: #80848e;
+  padding: 3px 4px;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 3px auto;
+}
+
+.channel:hover {
+  color: #c3c3c3;
+  background: #36383e;
+}
+
+.channel:focus {
+  color: #ededed;
+  background: #36383e;
+}
+svg.icon-2W8DHg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.channel:hover > .icon-2W8DHg {
+  color: #80848e;
+}
+
+.channel:focus > .icon-2W8DHg {
+  color: #80848e;
+}
+summary {
+  color: #80848e;
+  font-size: 12px;
+  list-style: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details.category {
+  transition: 0.3s;
+}
+
+.arrow-2HswgU {
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+
+.icon-3zI3d2 {
+  left: 2px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+summary:focus > svg {
+  transform: rotate();
+}
+
+.server-title p {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.server-title {
+  padding: 9px 1em;
+  box-shadow: 0 0 1px 1px #1e1f22;
+  width: 100%;
+  opacity: 0.97;
+}
+
+.chgtfgF {
+  padding: 10px;
+}
+
+.account-user {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  background: #232428;
+  width: 17%;
+  padding: 4px 10px;
+}
+
+.avatar img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+.info {
+  position: absolute;
+  font-size: 8px;
+  font-weight: 100;
+  left: 48px;
+  display: grid;
+  top: 7px;
+  user-select: all;
+  width: 70px;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+.info:hover {
+  transition: 0.3s;
+  background-color: #36383e;
+}
+.info h1 {
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 18px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.info p {
+  color: #b5b7bb;
+  font-size: 11px;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+img.status {
+  position: absolute;
+  background: #232428;
+  border: 2px solid #232428;
+  width: 6%;
+  height: auto;
+  bottom: 7px;
+  left: 1.7em;
+}

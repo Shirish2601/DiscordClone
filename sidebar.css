@@ -1,0 +1,273 @@
+:root {
+  color-scheme: dark;
+  --servers: #1e1f22;
+  --channels: #2b2d31;
+}
+.inactive {
+  display: none;
+  pointer-events: none;
+}
+body {
+  background-color: #313338;
+  font-family: "Poppins", sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  position: fixed;
+  padding: 10px;
+  background: var(--servers);
+  height: 100%;
+  width: 4em;
+  user-select: none;
+  z-index: 1;
+}
+
+img.server {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0;
+  padding: 1px 0;
+  transition: 0.3s;
+}
+
+img.server:hover {
+  border-radius: 20%;
+}
+
+.childWrapper-1j_1ub {
+  transition: 0.3s;
+  background-color: #313338;
+  color: #ededed;
+  margin-left: -1px;
+  border-radius: 50%;
+  margin-bottom: 7px;
+  cursor: pointer;
+}
+
+.childWrapper-1j_1ub:hover {
+  background: #5865f2;
+  border-radius: 32%;
+}
+
+.childWrapper-1j_1ub,
+.wrapper-3kah-n {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.homeIcon-r0w4ny {
+  display: block;
+  width: 25px;
+  height: 20px;
+}
+
+hr.minihr {
+  border-color: #35363c;
+  border: 1.5px solid #35363c;
+  border-radius: 30px;
+  width: 39%;
+  margin: auto 10px;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+/* channels */
+/* .channels {
+  background: var(--channels);
+  margin-left: 4em;
+  width: 17%;
+  height: 100%;
+  position: fixed;
+  user-select: none;
+}
+
+.channel {
+  display: flex;
+  gap: 5px;
+  color: #80848e;
+  padding: 3px 4px;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 3px auto;
+}
+
+.channel:hover {
+  color: #c3c3c3;
+  background: #36383e;
+}
+
+.channel:focus {
+  color: #ededed;
+  background: #36383e;
+}
+
+svg.icon-2W8DHg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.channel:hover > .icon-2W8DHg {
+  color: #80848e;
+}
+
+.channel:focus > .icon-2W8DHg {
+  color: #80848e;
+}
+
+summary {
+  color: #80848e;
+  font-size: 12px;
+  list-style: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details.category {
+  transition: 0.3s;
+}
+
+.arrow-2HswgU {
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+
+.icon-3zI3d2 {
+  left: 2px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+summary:focus > svg {
+  transform: rotate();
+}
+
+.server-title p {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.server-title {
+  padding: 9px 1em;
+  box-shadow: 0 0 1px 1px #1e1f22;
+  width: 100%;
+  opacity: 0.97;
+}
+
+.chgtfgF {
+  padding: 10px;
+}
+
+.account-user {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  background: #232428;
+  width: 17%;
+  padding: 4px 10px;
+}
+
+.avatar img {
+  width: 15%;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+
+.info {
+  position: absolute;
+  font-size: 8px;
+  font-weight: 100;
+  left: 48px;
+  display: grid;
+  top: 14px;
+  user-select: all;
+}
+
+.info h1 {
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.info p {
+  color: #b5b7bb;
+  font-size: 11px;
+  margin-top: -5px;
+}
+
+img.status {
+  position: absolute;
+  background: #232428;
+  border: 2px solid #232428;
+  width: 7%;
+  height: auto;
+  bottom: 7px;
+  left: 1.7em;
+} */
+
+main {
+  user-select: none;
+  background: #313338;
+  padding: 0;
+  margin-left: 296px;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: transparent;
+}
+
+.btn-server-image {
+  background-color: #1e1f22;
+  border-color: #1e1f22;
+  border: none;
+  padding: 2px 0;
+}
+.icon {
+  padding: 10px 10px;
+  font-size: 1.5em;
+}
+.add-icon {
+  width: 100%;
+  border-radius: 50%;
+  margin: 0;
+  padding: 1px 0;
+  transition: 0.3s;
+  height: auto;
+  border: none;
+  background-color: #36383e;
+  margin-top: 10px;
+}
+.add-icon:hover {
+  border-radius: 20%;
+}
+
+/* text area styling */
