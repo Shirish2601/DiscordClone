@@ -1,16 +1,38 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const routes = require("./routes/server-routes");
-const userRoutes = require("./routes/user-routes");
+const routes = require("./backend/routes/server-routes");
+const userRoutes = require("./backend/routes/user-routes");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const HTTPError = require("./models/HTTPError");
+const HTTPError = require("./backend/models/HTTPError");
+const session = require("express-session");
+const path = require("path");
+const mime = require("mime");
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(
+  "/public",
+  express.static("public", {
+    setHeaders: (res, path) => {
+      if (mime.getType(path) === "text/css") {
+        res.setHeader("Content-Type", "text/css");
+      }
+    },
+  })
+);
 
-app.use("/api/user", userRoutes);
+app.use("/", userRoutes);
 
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -22,11 +44,12 @@ app.use("/api/user", userRoutes);
 //   next();
 // });
 app.use(routes);
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use((req, res, next) => {
-  const error = new HTTPError("Could not find this route", 404);
-  throw error;
-});
+// app.use((req, res, next) => {
+//   const error = new HTTPError("Could not find this route", 404);
+//   throw error;
+// });
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {

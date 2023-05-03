@@ -4,9 +4,9 @@ btn.addEventListener("click", async (e) => {
   e.stopImmediatePropagation();
   const email = document.querySelector(".emailval").value;
   const password = document.querySelector(".passwdval").value;
-
+  console.log(email, password);
   try {
-    const response = await fetch("http://localhost:5500/api/user/login", {
+    const response = await fetch("http://localhost:5500/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,12 +16,11 @@ btn.addEventListener("click", async (e) => {
         password,
       }),
     });
-
     const data = await response.json();
     if (!response.ok) {
       throw new Error(data.message);
     } else {
-      window.location.href = "./sidebar.html";
+      window.location.href = "/me/servers";
     }
   } catch (err) {
     console.log(err);

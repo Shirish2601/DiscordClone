@@ -5,6 +5,10 @@ const { check } = require("express-validator");
 
 // router.get("/:uid", UserController.getUserById);
 
+router.get("/login/", UserController.getLoginPage);
+
+router.get("/me/servers/", UserController.getServersPage);
+
 router.post(
   "/login/",
   [check("email").isEmail(), check("password").isLength({ min: 2 })],

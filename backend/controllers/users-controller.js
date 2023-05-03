@@ -1,8 +1,9 @@
 const HTTPError = require("../models/HTTPError");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
-const user = require("../models/user");
+const path = require("path");
 
+const VIEWS_PATH = path.join(__dirname, "../../", "views");
 // const DUMMY_USERS = [
 //   {
 //     id: "u1",
@@ -103,7 +104,6 @@ const registerUser = async (req, res, next) => {
     );
     return next(error);
   }
-
   res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
@@ -131,8 +131,19 @@ const loginUser = async (req, res, next) => {
     const error = new HTTPError("Incorrect Password, please try again.", 401);
     return next(error);
   }
-  res.json({ message: "Logged in!" });
+  req.session.user = user;
+  res.json({ user: user.toObject({ getters: true }) });
 };
 
+const getLoginPage = async (req, res, next) => {
+  res.render(path.join(VIEWS_PATH, "/loginpage"));
+};
+const getServersPage = async (req, res, next) => {
+  const user = req.session.user;
+  res.render(path.join(VIEWS_PATH, "/me/servers"), { user: user });
+};
+
+exports.getServersPage = getServersPage;
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;
+exports.getLoginPage = getLoginPage;
