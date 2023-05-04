@@ -7,18 +7,18 @@ const { check } = require("express-validator");
 
 router.get("/", UserController.getHomePage);
 
-router.get("/login/", UserController.getLoginPage);
-
-router.get("/me/servers/:sid", UserController.getServerById);
-router.get("/me/servers/", UserController.getServersPage);
-
-router.post("/me/servers/", UserController.createServer);
+router.get("/me/:sid/:cid", UserController.getChannelById);
+router.get("/me/:sid", UserController.getServerById);
+router.get("/me/", UserController.getServersPage);
+router.post("/me/", UserController.createServer);
 
 router.post(
   "/login/",
   [check("email").isEmail(), check("password").isLength({ min: 2 })],
   UserController.loginUser
 );
+router.get("/login/", UserController.getLoginPage);
+
 router.post(
   "/register/",
   [

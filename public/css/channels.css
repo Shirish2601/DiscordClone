@@ -42,6 +42,17 @@ svg.icon-2W8DHg {
   color: #80848e;
 }
 
+/* anchor tag */
+.channel-name__link {
+  text-decoration: none;
+  color: #808183;
+}
+.channel-name__link:hover {
+  color: #c3c3c3;
+  transition: 0.3s;
+  background-color: #36383e;
+}
+
 .channel:focus > .icon-2W8DHg {
   color: #80848e;
 }

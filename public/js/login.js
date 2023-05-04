@@ -16,11 +16,10 @@ btn.addEventListener("click", async (e) => {
         password,
       }),
     });
-    const data = await response.json();
     if (!response.ok) {
-      throw new Error(data.message);
+      throw new Error("Login failed!");
     } else {
-      window.location.href = "/me/servers";
+      window.location.href = "/me/";
     }
   } catch (err) {
     console.log(err);

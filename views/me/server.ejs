@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Discord Mockup</title>
+    <title>Discord</title>
 
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link
@@ -51,6 +51,22 @@
         </div>
         <hr class="minihr" />
         <div class="sidebar-servers">
+          <% for (let [index, server] of servers.entries()) { %> <% if (index
+          === 0) { %>
+          <a href="/me/<%= server._id %>" class="btn-server-image">
+            <img
+              class="server"
+              style="margin-top: 7px"
+              src="<%= server.image %>"
+              alt="server"
+            />
+          </a>
+          <% } else { %>
+          <a href="/me/<%= server._id %>" class="btn-server-image">
+            <img class="server" src="<%= server.image %>" alt="server" />
+          </a>
+          <% } %> <% } %>
+
           <button class="add-icon">
             <i
               class="fa-sharp fa-solid fa-plus icon add-icon-btn"
@@ -59,8 +75,6 @@
           </button>
         </div>
       </div>
-      <div><%- include('./../channels.ejs') %></div>
-      <div><%- include('./../textarea.ejs') %></div>
     </div>
   </body>
 </html>

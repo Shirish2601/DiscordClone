@@ -6,37 +6,6 @@ const Channel = require("../models/channel");
 const path = require("path");
 
 const VIEWS_PATH = path.join(__dirname, "../../", "views");
-// const DUMMY_USERS = [
-//   {
-//     id: "u1",
-//     name: "Bruh",
-//     email: "test@test.com",
-//     password: "test",
-//   },
-//   {
-//     id: "u2",
-//     name: "Bruh2",
-//     email: "test@test1.com",
-//     password: "test",
-//   },
-//   {
-//     id: "u3",
-//     name: "Bruh3",
-//     email: "testtest@test.com",
-//     password: "test",
-//   },
-// ];
-// const getUserById = (req, res, next) => {
-//   const userId = req.params.uid;
-//   const user = DUMMY_USERS.find((u) => {
-//     return u.id === userId;
-//   });
-
-//   if (!user) {
-//     throw new HTTPError("Could not find user for the provided id.", 404);
-//   }
-//   res.json({ user });
-// };
 
 const getDiscriminator = async (username) => {
   let maxDiscrim = -1;
@@ -134,7 +103,7 @@ const loginUser = async (req, res, next) => {
     return next(error);
   }
   req.session.user = user;
-  res.json({ user: user.toObject({ getters: true }) });
+  res.redirect("/me");
 };
 
 const getLoginPage = async (req, res, next) => {
@@ -142,13 +111,26 @@ const getLoginPage = async (req, res, next) => {
 };
 const getServersPage = async (req, res, next) => {
   const user = req.session.user;
-  res.render(path.join(VIEWS_PATH, "/me/servers"), { user: user });
+  if (!user) return res.redirect("/login");
+  const servers = await Server.find({ members: user._id });
+  res.render(path.join(VIEWS_PATH, "/me/server"), {
+    user: user,
+    servers: servers,
+  });
 };
 const getServerById = async (req, res, next) => {
   const serverId = req.params.sid;
   const server = await Server.findById(serverId).populate("channels");
-  //res.json({ server: server.toObject({ getters: true }) });
-  res.render(path.join(VIEWS_PATH, "/me/server/"), { server: server });
+
+  const user = req.session.user;
+  if (!user) return res.redirect("/login");
+  const servers = await Server.find({ members: user._id });
+
+  res.render(path.join(VIEWS_PATH, "/server/channel"), {
+    server: server,
+    user: req.session.user,
+    servers: servers,
+  });
 };
 
 const createServer = async (req, res, next) => {
@@ -169,6 +151,8 @@ const createServer = async (req, res, next) => {
 
     await firstChannel.save();
     createdServer.channels.push(firstChannel);
+    const user = req.session.user;
+    createdServer.members.push(user);
     await createdServer.save();
   } catch (err) {
     console.log(err);
@@ -178,7 +162,8 @@ const createServer = async (req, res, next) => {
     );
     return next(error);
   }
-  res.status(201).json({ server: createdServer.toObject({ getters: true }) });
+  // res.status(201).json({ server: createdServer.toObject({ getters: true }) });
+  res.redirect(`/me/${createdServer._id}`);
 };
 
 const getHomePage = async (req, res, next) => {
@@ -188,6 +173,9 @@ const getRegisterPage = async (req, res, next) => {
   res.render(path.join(VIEWS_PATH, "/registerpage"));
 };
 
+const getChannelById = async (req, res, next) => {};
+
+exports.getChannelById = getChannelById;
 exports.getRegisterPage = getRegisterPage;
 exports.getHomePage = getHomePage;
 exports.createServer = createServer;

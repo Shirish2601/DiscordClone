@@ -48,6 +48,21 @@
   width: 50px;
   height: 50px;
 }
+
+.upload-server__logo input {
+  width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: #f1f3f5;
+  color: black;
+}
+.upload-server__logo label {
+  margin-bottom: 5px;
+  color: black;
+}
+
 .upload-server__logo img:hover {
   cursor: pointer;
 }
@@ -58,6 +73,11 @@
   display: inline-block;
   text-align: center;
   color: black;
+}
+.upload-server__url {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
 .upload-server__name {
   display: flex;
