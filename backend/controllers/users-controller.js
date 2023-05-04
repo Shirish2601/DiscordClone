@@ -1,6 +1,8 @@
 const HTTPError = require("../models/HTTPError");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
+const Server = require("../models/server");
+const Channel = require("../models/channel");
 const path = require("path");
 
 const VIEWS_PATH = path.join(__dirname, "../../", "views");
@@ -142,7 +144,54 @@ const getServersPage = async (req, res, next) => {
   const user = req.session.user;
   res.render(path.join(VIEWS_PATH, "/me/servers"), { user: user });
 };
+const getServerById = async (req, res, next) => {
+  const serverId = req.params.sid;
+  const server = await Server.findById(serverId).populate("channels");
+  //res.json({ server: server.toObject({ getters: true }) });
+  res.render(path.join(VIEWS_PATH, "/me/server/"), { server: server });
+};
 
+const createServer = async (req, res, next) => {
+  const { servername, image } = req.body;
+  const createdServer = new Server({
+    servername,
+    image,
+  });
+
+  try {
+    await createdServer.save();
+
+    const firstChannel = new Channel({
+      name: "Welcome",
+      messages: [],
+      serverid: createdServer._id,
+    });
+
+    await firstChannel.save();
+    createdServer.channels.push(firstChannel);
+    await createdServer.save();
+  } catch (err) {
+    console.log(err);
+    const error = new HTTPError(
+      "Creating server failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+  res.status(201).json({ server: createdServer.toObject({ getters: true }) });
+};
+
+const getHomePage = async (req, res, next) => {
+  res.render(path.join(VIEWS_PATH, "/index"));
+};
+const getRegisterPage = async (req, res, next) => {
+  res.render(path.join(VIEWS_PATH, "/registerpage"));
+};
+
+exports.getRegisterPage = getRegisterPage;
+exports.getHomePage = getHomePage;
+exports.createServer = createServer;
+exports.getServerById = getServerById;
 exports.getServersPage = getServersPage;
 exports.registerUser = registerUser;
 exports.loginUser = loginUser;

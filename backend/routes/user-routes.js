@@ -5,9 +5,14 @@ const { check } = require("express-validator");
 
 // router.get("/:uid", UserController.getUserById);
 
+router.get("/", UserController.getHomePage);
+
 router.get("/login/", UserController.getLoginPage);
 
+router.get("/me/servers/:sid", UserController.getServerById);
 router.get("/me/servers/", UserController.getServersPage);
+
+router.post("/me/servers/", UserController.createServer);
 
 router.post(
   "/login/",
@@ -25,5 +30,6 @@ router.post(
   ],
   UserController.registerUser
 );
+router.get("/register/", UserController.getRegisterPage);
 
 module.exports = router;

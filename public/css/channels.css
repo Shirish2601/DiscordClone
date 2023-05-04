@@ -112,7 +112,12 @@ summary:focus > svg {
   border-radius: 50%;
   margin-top: 4px;
 }
-
+.channel-header {
+  display: flex;
+  align-items: center;
+}
+.add-icon__div {
+}
 .info {
   position: absolute;
   font-size: 8px;
@@ -144,7 +149,28 @@ summary:focus > svg {
   margin-left: 10px;
   margin-top: 2px;
 }
-
+.add_icon {
+  margin-left: 190px;
+  cursor: pointer;
+  color: #808183;
+}
+.add_icon:hover {
+  transition: 0.3s;
+  color: white;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+}
+.settings_icon {
+  margin-left: 120px;
+  cursor: pointer;
+  color: #808183;
+}
+.settings_icon:hover {
+  transition: 0.3s;
+  color: white;
+}
 img.status {
   position: absolute;
   background: #232428;
@@ -152,5 +178,5 @@ img.status {
   width: 6%;
   height: auto;
   bottom: 7px;
-  left: 1.7em;
+  left: 2.68em;
 }

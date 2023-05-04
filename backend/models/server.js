@@ -1,6 +1,25 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// const ServerSchema = new Schema({
+//   servername: { type: String, required: true },
+//   image: { type: String, required: true },
+//   channels: [
+//     {
+//       channelId: { type: String, required: true },
+//       name: { type: String, required: true },
+//       messages: [
+//         {
+//           messageId: { type: String, required: true },
+//           message: { type: String, required: true },
+//           sender: { type: String, required: true },
+//           createdAt: { type: Date, default: Date.now },
+//         },
+//       ],
+//     },
+//   ],
+// });
+
 const ServerSchema = new Schema({
   servername: { type: String, required: true },
   image: { type: String, required: true },
@@ -10,10 +29,7 @@ const ServerSchema = new Schema({
       name: { type: String, required: true },
       messages: [
         {
-          message: { type: String, required: true },
-          sender: { type: String, required: true },
-          createdAt: { type: Date, default: Date.now },
-          user: { type: Schema.Types.ObjectId, ref: "User" },
+          message: { type: Schema.Types.ObjectId, ref: "message" },
         },
       ],
     },

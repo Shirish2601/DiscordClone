@@ -21,59 +21,17 @@ const DUMMY_SERVERS = [
 
 router.get("/getpopup", (req, res, next) => {
   res.set("Content-Type", "text/html");
-  res.sendFile("F:\\College\\Discord Clone\\popup.html");
+  res.sendFile("F:\\College\\Discord Clone\\views\\popup.ejs");
 });
 
-router.get("/getpopup.css", (req, res, next) => {
-  res.set("Content-Type", "text/css");
-  res.sendFile("F:\\College\\Discord Clone\\popup.css");
-});
-
-router.get("/channels/:serverId/:channelId/", (req, res, next) => {
+router.get("/getpopupcreatechannel", (req, res, next) => {
   res.set("Content-Type", "text/html");
-  res.sendFile("F:\\College\\Discord Clone\\HTML\\channels.html");
-});
-
-router.get("/channels/", (req, res, next) => {
-  res.set("Content-Type", "text/css");
-  res.sendFile("F:\\College\\Discord Clone\\HTML\\channels.css");
-});
-router.get("/gettextarea/", (req, res, next) => {
-  res.set("Content-Type", "text/html");
-  res.sendFile("F:\\College\\Discord Clone\\HTML\\textarea.html");
-});
-router.get("/gettextarea.css", (req, res, next) => {
-  res.set("Content-Type", "text/css");
-  res.sendFile("F:\\College\\Discord Clone\\HTML\\textarea.css");
+  res.sendFile("F:\\College\\Discord Clone\\views\\popupcreatechannel.ejs");
 });
 
 // router.post("/createserver", (req, res, next) => {
 //   const { serverName } = req.body;
 
 //   ")
-
-router.get("/channels/:serverId/:channelId/", (req, res, next) => {
-  const channelId = req.params.channelId;
-  const serverId = req.params.serverId;
-  const server = DUMMY_SERVERS.find((server) => server.id === serverId);
-  const channel = server.channels.find((channel) => channel.id === channelId);
-
-  res.set("Content-Type", "text/html");
-  res.sendFile("F:\\College\\Discord Clone\\HTML\\channels.html");
-});
-
-router.post("/testserver", (req, res, next) => {
-  res.set("Content-Type", "application/json");
-
-  const { servername, image, channels, members } = req.body;
-  const server = new ServerSchema({
-    servername,
-    image,
-    channels,
-    members,
-  });
-
-  res.status(201).json({ server });
-});
 
 module.exports = router;
