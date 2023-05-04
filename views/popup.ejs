@@ -1,46 +1,72 @@
 <div class="server-popup">
-  <div class="server-popup__header">
-    <h2>Create a Server</h2>
-    <p>
-      Your server is where you and your friends hang out. Make yours and start
-      talking.
-    </p>
+  <div class="ask-user">
+    <div class="ask-join">
+      <div class="ask-join__content">
+        <img src="/images/joinserver.svg" alt="logo" />
+        <h3>Join Server</h3>
+      </div>
+      <i class="fa-solid fa-angle-right right_angle"></i>
+    </div>
+    <div class="ask-create">
+      <div class="ask-user__content">
+        <img src="/images/createserver.svg" alt="logo" />
+        <h3>Create Server</h3>
+      </div>
+      <i class="fa-solid fa-angle-right right_angle"></i>
+    </div>
   </div>
-  <div class="input-server">
-    <div class="upload-server__logo">
-      <!-- <input type="file" accept="image/*" id="imageupload" />
-      <label for="imageupload" class="input-server__label">
-        <img
-          src="/images/serverupload.png"
-          id="imageUploadedByUser"
-          alt="uploadlogo"
-        />
-      </label> -->
-      <!-- <span>Upload Server Image</span> -->
-      <div class="upload-server__url">
-        <label>Enter URL</label>
+  <div class="create-server__popup hidden">
+    <div class="server-popup__header">
+      <h2>Create a Server</h2>
+      <p>
+        Your server is where you and your friends hang out. Make yours and start
+        talking.
+      </p>
+    </div>
+    <div class="input-server">
+      <div class="upload-server__logo">
+        <div class="upload-server__url">
+          <label>Enter URL</label>
+          <input
+            type="text"
+            placeholder="Enter Image url"
+            class="input-server__url"
+          />
+        </div>
+      </div>
+      <div class="upload-server__name">
+        <label> Server Name </label>
         <input
           type="text"
-          placeholder="Enter Image url"
-          class="input-server__url"
+          placeholder="Enter a server name"
+          class="input-server__name"
         />
       </div>
     </div>
-    <div class="upload-server__name">
-      <label> Server Name </label>
-      <input
-        type="text"
-        placeholder="Enter a server name"
-        class="input-server__name"
-      />
+    <div class="btn-create">
+      <div>
+        <button class="create-server__button back">Back</button>
+      </div>
+      <div>
+        <button class="create-server__button create">Create</button>
+      </div>
     </div>
   </div>
-  <div class="btn-create">
-    <div>
-      <button class="create-server__button back">Back</button>
-    </div>
-    <div>
-      <button class="create-server__button create">Create</button>
+  <div class="join-server__popup hidden">
+    <div class="invite-code">
+      <h3>Join a Server</h3>
+      <div class="invite-code__form">
+        <label> Enter an invite below to join an existing server. </label>
+        <input
+          type="text"
+          placeholder="Enter an invite"
+          class="invite-code__input"
+        />
+        <div class="invite-join__button">
+          <button class="invite-back">Back</button>
+          <button class="invite-join">Join</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

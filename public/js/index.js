@@ -109,7 +109,6 @@ addServerButton.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
 
-  // check if popup is already open
   if (document.querySelector(".popup")) {
     popupRemover(discordContainer, document.querySelector(".popup"));
   }
@@ -131,98 +130,110 @@ addServerButton.addEventListener("click", async (e) => {
 
     discordContainer.style.cssText = "opacity: 0.5";
 
-    discordContainer.addEventListener("click", () => {
-      popupRemover(discordContainer, popup);
-    });
-
-    const backBtn = document.querySelector(".create-server__button.back");
-    backBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      popupRemover(discordContainer, popup);
-    });
-
-    // const imgSelector = document.querySelector("#imageupload");
-
-    // imgSelector.addEventListener("change", (e) => {
-    //   e.preventDefault();
-    //   e.stopImmediatePropagation();
-
-    //   const reader = new FileReader();
-    //   reader.addEventListener("load", () => {
-    //     serverLogo = reader.result;
-    //     const imgByUser = document.querySelector("#imageUploadedByUser");
-    //     imgByUser.setAttribute("src", serverLogo);
-    //     imgByUser.style.cssText = "width: 80px; height: 80px;";
-    //     document
-    //       .querySelector(".upload-server__logo span")
-    //       .classList.add("inactive");
-    //   });
-    //   reader.readAsDataURL(imgSelector.files[0]);
+    // discordContainer.addEventListener("click", () => {
+    //   popupRemover(discordContainer, popup);
     // });
 
-    const createBtn = document.querySelector(".create-server__button.create");
-    createBtn.addEventListener("click", async (e) => {
+    //
+    const askJoinButton = document.querySelector(".ask-join");
+    const askCreateButton = document.querySelector(".ask-create");
+    const askUserPopup = document.querySelector(".ask-user");
+    const createServerPopup = document.querySelector(".create-server__popup");
+    const joinServerPopup = document.querySelector(".join-server__popup");
+
+    const hidePopups = () => {
+      askUserPopup.classList.add("hidden");
+      createServerPopup.classList.add("hidden");
+      joinServerPopup.classList.add("hidden");
+    };
+
+    // new
+    askJoinButton.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      hidePopups();
+      joinServerPopup.classList.remove("hidden");
+      const inviteBackButton = document.querySelector(".invite-back");
+      inviteBackButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        popupRemover(discordContainer, popup);
+      });
+
+      const inviteCode = document.querySelector(".invite-code__input").value;
+    });
+
+    askCreateButton.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
 
-      const serverName = document.querySelector(
-        ".upload-server__name input"
-      ).value;
+      console.log("create");
 
-      const serverImageUrl = document.querySelector(".input-server__url").value;
+      hidePopups();
+      createServerPopup.classList.remove("hidden");
 
-      if (serverName === "") {
-        alert("Please enter a server name");
-        return;
-      }
+      const backBtn = document.querySelector(".create-server__button.back");
+      backBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        popupRemover(discordContainer, popup);
+      });
 
-      // const serverLogoPath = document.querySelector(
-      //   ".upload-server__logo input"
-      // ).value;
+      const createBtn = document.querySelector(".create-server__button.create");
+      createBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-      if (serverImageUrl === "") {
-        alert("Please enter a server logo");
-        return;
-      }
+        const serverName = document.querySelector(
+          ".upload-server__name input"
+        ).value;
 
-      if (serverImageUrl && serverName) {
-        const responseServer = await fetch("http://localhost:5500/me", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            servername: serverName,
-            image: serverImageUrl,
-          }),
-        });
+        const serverImageUrl =
+          document.querySelector(".input-server__url").value;
 
-        if (!responseServer.ok) {
-          throw new Error("Server creation failed!");
-        } else {
-          serverCreated = true;
-          window.location.href = "/me/server";
+        if (serverName === "") {
+          alert("Please enter a server name");
+          return;
         }
-        // const serverData = await responseServer.json();
-        // const serverId = serverData.serverId;
 
-        // const serverHTML = `<a href="/channels/s1/c1/" class="btn-server-image ">
-        // <img class="server" src="${serverData.image}" alt="server" />
-        // </a>`;
-        // document
-        //   .querySelector(".sidebar-servers")
-        //   .insertAdjacentHTML("afterbegin", serverHTML);
+        if (serverImageUrl === "") {
+          alert("Please enter a server logo");
+          return;
+        }
 
-        // const serverList = document.querySelectorAll(".btn-server-image");
-        // serverList.forEach((server, index) => {
-        //   if (index === 0) server.classList.add("active");
-        //   else {
-        //     server.classList.remove("active");
-        //   }
-        // });
-      }
-      popupRemover(discordContainer, popup);
+        if (serverImageUrl && serverName) {
+          const responseServer = await fetch("http://localhost:5500/me", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              servername: serverName,
+              image: serverImageUrl,
+            }),
+          });
+
+          const data = await responseServer.json();
+
+          const parentElement = document.querySelector(".sidebar-servers");
+
+          const serverHTML = `
+          <a href="/me/${data.server._id}" class="btn-server-image">
+            <img class="server" style="margin-top: 7px" src="${data.server.image} " alt="server">
+          </a>`;
+
+          parentElement.insertAdjacentHTML("afterbegin", serverHTML);
+
+          if (!responseServer.ok) {
+            throw new Error("Server creation failed!");
+          } else {
+            serverCreated = true;
+          }
+          // remove the popup
+          popupRemover(discordContainer, popup);
+        }
+      });
+      // popupRemover(discordContainer, popup);
     });
   } catch (err) {
     console.log(err);

@@ -4,7 +4,6 @@ btn.addEventListener("click", async (e) => {
   e.stopImmediatePropagation();
   const email = document.querySelector(".emailval").value;
   const password = document.querySelector(".passwdval").value;
-  console.log(email, password);
   try {
     const response = await fetch("http://localhost:5500/login", {
       method: "POST",

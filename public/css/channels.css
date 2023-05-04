@@ -96,12 +96,24 @@ summary:focus > svg {
   color: #ffffff;
   font-weight: 400;
 }
+.server-title i {
+  color: #808183;
+  cursor: pointer;
+}
+
+.server-title i:hover {
+  color: #ffffff;
+  transition: 0.3s;
+}
 
 .server-title {
   padding: 9px 1em;
   box-shadow: 0 0 1px 1px #1e1f22;
   width: 100%;
   opacity: 0.97;
+  display: flex;
+  align-items: center;
+  gap: 140px;
 }
 
 .chgtfgF {
@@ -190,4 +202,40 @@ img.status {
   height: auto;
   bottom: 7px;
   left: 2.68em;
+}
+
+.hidden {
+  display: none;
+  pointer-events: none;
+}
+
+.dropdown-server {
+  z-index: 5;
+  position: fixed;
+  top: 50;
+  left: 80;
+  width: 100%;
+  height: 100%;
+  background-color: #1e1f22;
+  opacity: 0.97;
+  box-shadow: 0 0 1px 1px #1e1f22;
+}
+.dropdown-server-content {
+  padding: 10px 10px;
+}
+.dropdown-server-content:hover {
+  background-color: #36383e;
+  transition: 0.3s;
+}
+.leave-server {
+  text-decoration: none;
+  color: #f23f42;
+}
+.dropdown-server-content.anchor:hover {
+  color: white;
+  background-color: #f23f42;
+}
+.dropdown-server-content.anchor:hover,
+.dropdown-server-content.anchor a {
+  color: white;
 }

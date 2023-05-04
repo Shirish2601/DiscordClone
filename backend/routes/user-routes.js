@@ -34,6 +34,9 @@ router.post(
   ],
   UserController.registerUser
 );
+
+router.post("/joinserver", UserController.joinServer);
+
 router.get("/register/", UserController.getRegisterPage);
 
 module.exports = router;

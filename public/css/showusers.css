@@ -1,0 +1,37 @@
+.show_users {
+  z-index: 100;
+  position: absolute;
+  right: 0;
+  top: 40;
+  width: 300px;
+  height: 86%;
+  background-color: #232428;
+  box-shadow: 0 0 1px 1px #1e1f22;
+}
+.hidden {
+  display: none;
+  pointer-events: none;
+}
+.show-users__info--profile {
+  color: white;
+}
+.show-users__info {
+  opacity: 0.7;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 10px;
+}
+.show-users__info:hover {
+  transition: 0.3s;
+  background-color: #36383e;
+  opacity: 1;
+}
+
+.show-users__info--image img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-left: 10px;
+}

@@ -18,6 +18,7 @@
     <script defer src="/js/index.js" type="module"></script>
     <script defer src="/js/addchannel.js"></script>
     <script defer src="/js/textareahandler.js"></script>
+    <script defer src="/js/iconhandler.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -29,6 +30,7 @@
     <link rel="stylesheet" href="/css/textarea.css" />
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/popup.css" />
+    <link rel="stylesheet" href="/css/showusers.css" />
   </head>
 
   <body>
@@ -80,6 +82,15 @@
       <div class="channels">
         <div class="server-title">
           <p><%= server.servername %></p>
+          <i class="fa-solid fa-chevron-down down_icon"></i>
+        </div>
+        <div class="dropdown-server">
+          <div class="dropdown-server-content">
+            <p>Invite Code &nbsp;&nbsp;<%= server.joincode %></p>
+          </div>
+          <div class="dropdown-server-content anchor">
+            <a href="#" class="leave-server">Leave Server</a>
+          </div>
         </div>
         <div class="chgtfgF">
           <div class="add-icon__div">
@@ -190,6 +201,7 @@
           </div>
         </div>
       </div>
+
       <main class="channel_textarea">
         <div class="channel_channel-title">
           <div>
@@ -206,8 +218,36 @@
             placeholder="Enter Your Message Here"
           ></textarea>
         </div>
-        <div class="channel_msg-wrapper"></div>
+        <div class="channel_msg-wrapper">
+          <!--  -->
+          <% channel.messages.reverse().forEach((message) => { %>
+          <div class="channel_msg-content">
+            <div class="channel_userInfo">
+              <img src="<%= user.image %>" alt="profileimage" />
+              <div class="channel_info">
+                <span class="channel_nameUser"><%= user.username %></span>
+                <span class="channel_timeofmsg">
+                  today at <%= message.createdAt %>
+                </span>
+              </div>
+            </div>
+            <div class="channel_actualmsg">
+              <p><%= message.message %></p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
       </main>
+      <div class="show_users hidden">
+        <div class="show-users__info">
+          <div class="show-users__info--image">
+            <img src="https://i.imgur.com/6VBx3io.png" alt="profileimage" />
+          </div>
+          <div class="show-users__info--profile">
+            <span>Shirish&nbsp;#1200</span>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

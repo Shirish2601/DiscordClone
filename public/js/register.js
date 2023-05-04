@@ -12,7 +12,7 @@ button.addEventListener("click", async (e) => {
   userEmail = userEmail.trim();
   console.log(userName, userPassword, userEmail);
   try {
-    const response = await fetch("http://localhost:5500/api/user/register", {
+    const response = await fetch("http://localhost:5500/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,11 +24,10 @@ button.addEventListener("click", async (e) => {
       }),
     });
 
-    const data = await response.json();
     if (!response.ok) {
-      throw new Error(data.message);
+      throw new Error("Signup Failed!");
     } else {
-      window.location.href = "http://localhost:5500/login.html";
+      window.location.href = "/me/";
     }
   } catch (err) {
     console.log(err);

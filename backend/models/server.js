@@ -30,6 +30,7 @@ const ServerSchema = new Schema({
     },
   ],
   members: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  joincode: { type: String, unique: true },
 });
 
 module.exports = mongoose.model("Server", ServerSchema);

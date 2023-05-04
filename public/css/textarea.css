@@ -17,6 +17,7 @@
 }
 .icon-members {
   color: #808183;
+  cursor: pointer;
 }
 .icon-members:hover {
   color: #ffffff;

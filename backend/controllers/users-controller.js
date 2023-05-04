@@ -8,6 +8,16 @@ const path = require("path");
 
 const VIEWS_PATH = path.join(__dirname, "../../", "views");
 
+const generateJoinCode = () => {
+  let code = "";
+  let alphabets = "abcdefghijklmnopqrstuvwxyz";
+  for (let i = 0; i < 6; i++) {
+    let random = Math.floor(Math.random() * 26);
+    code += alphabets[random];
+  }
+  return code;
+};
+
 const getDiscriminator = async (username) => {
   let maxDiscrim = -1;
   let users = await User.find();
@@ -76,7 +86,12 @@ const registerUser = async (req, res, next) => {
     );
     return next(error);
   }
-  res.status(201).json({ user: createdUser.toObject({ getters: true }) });
+  req.session.user = createdUser;
+
+  // res.render(path.join(VIEWS_PATH, "/me/"), { user: createdUser });
+  res.redirect("/me");
+
+  // res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
 const loginUser = async (req, res, next) => {
@@ -135,10 +150,18 @@ const getServerById = async (req, res, next) => {
 };
 
 const createServer = async (req, res, next) => {
+  let joincode = generateJoinCode();
+  let exists = await Server.findOne({ joincode: joincode });
+  while (exists) {
+    joincode = generateJoinCode();
+    exists = await Server.findOne({ joincode: joincode });
+  }
+
   const { servername, image } = req.body;
   const createdServer = new Server({
     servername,
     image,
+    joincode,
   });
 
   try {
@@ -163,8 +186,8 @@ const createServer = async (req, res, next) => {
     );
     return next(error);
   }
-  // res.status(201).json({ server: createdServer.toObject({ getters: true }) });
-  res.redirect(`/me/${createdServer._id}`);
+  res.status(201).json({ server: createdServer.toObject({ getters: true }) });
+  // res.redirect(`/me/${createdServer._id}`);
 };
 
 const getHomePage = async (req, res, next) => {
@@ -246,6 +269,37 @@ const createMessage = async (req, res, next) => {
   });
 };
 
+const joinServer = async (req, res, next) => {
+  const user = req.session.user;
+  if (!user) {
+    const error = new HTTPError("Server not joined!", 401);
+    return next(error);
+  }
+  const { joincode } = req.body;
+  const server = await Server.findOne({ joincode: joincode });
+  if (!server) {
+    const error = new HTTPError("Server not found!", 404);
+    return next(error);
+  }
+  if (server.members.includes(user._id)) {
+    const error = new HTTPError("Server already joined!", 401);
+    return next(error);
+  }
+  try {
+    server.members.push(user);
+    await server.save();
+  } catch (err) {
+    console.log(err);
+    const error = new HTTPError(
+      "Joining server failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+  res.status(201).json({ server: server.toObject({ getters: true }) });
+};
+
+exports.joinServer = joinServer;
 exports.createMessage = createMessage;
 exports.createChannel = createChannel;
 exports.getChannelById = getChannelById;
