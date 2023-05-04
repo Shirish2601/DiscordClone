@@ -5,8 +5,10 @@ const ChannelSchema = new Schema({
   name: { type: String, required: true },
   messages: [
     {
-      message: { type: Schema.Types.ObjectId, ref: "message" },
-      createdAt: { type: Date, default: Date.now },
+      sender: { type: String },
+      message: { type: String },
+      messageid: { type: Schema.Types.ObjectId, ref: "Message" },
+      createdAt: { type: String },
       user: { type: Schema.Types.ObjectId, ref: "User" },
     },
   ],

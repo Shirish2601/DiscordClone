@@ -27,11 +27,6 @@ const ServerSchema = new Schema({
     {
       channelId: { type: Schema.Types.ObjectId, ref: "Channel" },
       name: { type: String, required: true },
-      messages: [
-        {
-          message: { type: Schema.Types.ObjectId, ref: "message" },
-        },
-      ],
     },
   ],
   members: [{ type: Schema.Types.ObjectId, ref: "User" }],

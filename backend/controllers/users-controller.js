@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const User = require("../models/user");
 const Server = require("../models/server");
 const Channel = require("../models/channel");
+const Message = require("../models/message");
 const path = require("path");
 
 const VIEWS_PATH = path.join(__dirname, "../../", "views");
@@ -209,6 +210,43 @@ const createChannel = async (req, res, next) => {
   res.status(201).json({ channel: createdChannel.toObject({ getters: true }) });
 };
 
+const createMessage = async (req, res, next) => {
+  const user = req.session.user;
+  if (!user) {
+    const error = new HTTPError("Message not sent!", 401);
+    return next(error);
+  }
+  const { message, channelid } = req.body;
+
+  const createdAt = new Date().getHours() + ":" + new Date().getMinutes();
+  const createdMessage = new Message({
+    message,
+    channelid,
+    createdAt,
+  });
+
+  const sender = await User.findById(req.session.user._id);
+  try {
+    createdMessage.sender = sender.username;
+    await createdMessage.save();
+    const getChannel = await Channel.findById(channelid);
+    getChannel.messages.push(createdMessage);
+    await getChannel.save();
+  } catch (err) {
+    console.log(err);
+    const error = new HTTPError(
+      "Creating message failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+  res.status(201).json({
+    message: createdMessage.toObject({ getters: true }),
+    user: sender,
+  });
+};
+
+exports.createMessage = createMessage;
 exports.createChannel = createChannel;
 exports.getChannelById = getChannelById;
 exports.getRegisterPage = getRegisterPage;

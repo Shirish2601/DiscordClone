@@ -21,6 +21,8 @@ router.post("/createchannel", UserController.createChannel);
 
 router.get("/login/", UserController.getLoginPage);
 
+router.post("/createmessage", UserController.createMessage);
+
 router.post(
   "/register/",
   [
