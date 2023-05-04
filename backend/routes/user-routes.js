@@ -17,6 +17,8 @@ router.post(
   [check("email").isEmail(), check("password").isLength({ min: 2 })],
   UserController.loginUser
 );
+router.post("/createchannel", UserController.createChannel);
+
 router.get("/login/", UserController.getLoginPage);
 
 router.post(

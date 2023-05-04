@@ -173,8 +173,43 @@ const getRegisterPage = async (req, res, next) => {
   res.render(path.join(VIEWS_PATH, "/registerpage"));
 };
 
-const getChannelById = async (req, res, next) => {};
+const getChannelById = async (req, res, next) => {
+  const channelId = req.params.cid;
+  const channel = await Channel.findById(channelId).populate("messages");
+  const user = req.session.user;
+  if (!user) return res.redirect("/login");
+  const servers = await Server.find({ members: user._id });
+  const server = await Server.findById(channel.serverid);
+  res.render(path.join(VIEWS_PATH, "/layout/layout"), {
+    user: user,
+    servers: servers,
+    server: server,
+    channel: channel,
+  });
+};
+const createChannel = async (req, res, next) => {
+  const { name, serverid } = req.body;
+  const createdChannel = new Channel({
+    name,
+    serverid,
+  });
+  try {
+    await createdChannel.save();
+    const server = await Server.findById(serverid);
+    server.channels.push(createdChannel);
+    await server.save();
+  } catch (err) {
+    console.log(err);
+    const error = new HTTPError(
+      "Creating channel failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+  res.status(201).json({ channel: createdChannel.toObject({ getters: true }) });
+};
 
+exports.createChannel = createChannel;
 exports.getChannelById = getChannelById;
 exports.getRegisterPage = getRegisterPage;
 exports.getHomePage = getHomePage;
