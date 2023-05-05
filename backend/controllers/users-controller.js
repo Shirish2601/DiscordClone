@@ -128,7 +128,9 @@ const getLoginPage = async (req, res, next) => {
 const getServersPage = async (req, res, next) => {
   const user = req.session.user;
   if (!user) return res.redirect("/login");
+
   const servers = await Server.find({ members: user._id });
+
   res.render(path.join(VIEWS_PATH, "/me/server"), {
     user: user,
     servers: servers,
@@ -136,8 +138,7 @@ const getServersPage = async (req, res, next) => {
 };
 const getServerById = async (req, res, next) => {
   const serverId = req.params.sid;
-  const server = await Server.findById(serverId).populate("channels");
-
+  const server = await Server.findById(serverId).populate(["channels"]);
   const user = req.session.user;
   if (!user) return res.redirect("/login");
   const servers = await Server.find({ members: user._id });
@@ -203,7 +204,7 @@ const getChannelById = async (req, res, next) => {
   const user = req.session.user;
   if (!user) return res.redirect("/login");
   const servers = await Server.find({ members: user._id });
-  const server = await Server.findById(channel.serverid);
+  const server = await Server.findById(channel.serverid).populate("members");
   res.render(path.join(VIEWS_PATH, "/layout/layout"), {
     user: user,
     servers: servers,
@@ -297,6 +298,7 @@ const joinServer = async (req, res, next) => {
     return next(error);
   }
   res.status(201).json({ server: server.toObject({ getters: true }) });
+  // res.redirect(`/me/${server._id}`);
 };
 
 exports.joinServer = joinServer;

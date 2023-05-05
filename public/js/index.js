@@ -160,7 +160,32 @@ addServerButton.addEventListener("click", async (e) => {
         popupRemover(discordContainer, popup);
       });
 
-      const inviteCode = document.querySelector(".invite-code__input").value;
+      const joinServerButton = document.querySelector(".invite-join");
+
+      joinServerButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const joincode = document.querySelector(".invite-code__input").value;
+        const response = await fetch("http://localhost:5500/joinserver", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ joincode }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert("Invalid code");
+        } else {
+          const serverHTML = `
+          <a href="/me/${data.server._id}" class="btn-server-image">
+            <img class="server" style="margin-top: 7px" src="${data.server.image} " alt="server">
+          </a>`;
+          const serverContainer = document.querySelector(".sidebar-servers");
+          serverContainer.insertAdjacentHTML("afterbegin", serverHTML);
+          window.location.href = `/me/${data.server._id}`;
+        }
+      });
     });
 
     askCreateButton.addEventListener("click", async (e) => {

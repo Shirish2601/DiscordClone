@@ -19,6 +19,7 @@
     <script defer src="/js/addchannel.js"></script>
     <script defer src="/js/textareahandler.js"></script>
     <script defer src="/js/iconhandler.js"></script>
+    <script defer src="/js/serverhandler.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -84,7 +85,7 @@
           <p><%= server.servername %></p>
           <i class="fa-solid fa-chevron-down down_icon"></i>
         </div>
-        <div class="dropdown-server">
+        <div class="dropdown-server hidden">
           <div class="dropdown-server-content">
             <p>Invite Code &nbsp;&nbsp;<%= server.joincode %></p>
           </div>
@@ -239,14 +240,17 @@
         </div>
       </main>
       <div class="show_users hidden">
+        <!--  -->
+        <% server.members.forEach((member) => { %> <% console.log(member); %>
         <div class="show-users__info">
           <div class="show-users__info--image">
-            <img src="https://i.imgur.com/6VBx3io.png" alt="profileimage" />
+            <img src="<%= member.image %>" alt="profileimage" />
           </div>
           <div class="show-users__info--profile">
-            <span>Shirish&nbsp;#1200</span>
+            <span><%= member.username %> <%= member.discriminator %></span>
           </div>
         </div>
+        <% }) %>
       </div>
     </div>
   </body>
