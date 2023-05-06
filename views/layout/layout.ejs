@@ -15,6 +15,8 @@
       integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
       crossorigin="anonymous"
     ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/socket.io.js" type="module"></script>
     <script defer src="/js/index.js" type="module"></script>
     <script defer src="/js/addchannel.js"></script>
     <script defer src="/js/textareahandler.js"></script>
@@ -221,12 +223,14 @@
         </div>
         <div class="channel_msg-wrapper">
           <!--  -->
-          <% channel.messages.reverse().forEach((message) => { %>
+          <% messages.reverse().forEach((message) => { %>
           <div class="channel_msg-content">
             <div class="channel_userInfo">
-              <img src="<%= user.image %>" alt="profileimage" />
+              <img src="<%= message.user.image %>" alt="profileimage" />
               <div class="channel_info">
-                <span class="channel_nameUser"><%= user.username %></span>
+                <span class="channel_nameUser"
+                  ><%= message.user.username %></span
+                >
                 <span class="channel_timeofmsg">
                   today at <%= message.createdAt %>
                 </span>
@@ -241,13 +245,15 @@
       </main>
       <div class="show_users hidden">
         <!--  -->
-        <% server.members.forEach((member) => { %> <% console.log(member); %>
+        <% server.members.forEach((member) => { %>
         <div class="show-users__info">
           <div class="show-users__info--image">
             <img src="<%= member.image %>" alt="profileimage" />
           </div>
           <div class="show-users__info--profile">
-            <span><%= member.username %> <%= member.discriminator %></span>
+            <span
+              ><%= member.username %>&nbsp; #<%= member.discriminator %></span
+            >
           </div>
         </div>
         <% }) %>

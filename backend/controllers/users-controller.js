@@ -205,11 +205,15 @@ const getChannelById = async (req, res, next) => {
   if (!user) return res.redirect("/login");
   const servers = await Server.find({ members: user._id });
   const server = await Server.findById(channel.serverid).populate("members");
+  const messages = await Message.find({ channelid: channelId }).populate(
+    "user"
+  );
   res.render(path.join(VIEWS_PATH, "/layout/layout"), {
     user: user,
     servers: servers,
     server: server,
     channel: channel,
+    messages: messages,
   });
 };
 const createChannel = async (req, res, next) => {
@@ -252,6 +256,7 @@ const createMessage = async (req, res, next) => {
   const sender = await User.findById(req.session.user._id);
   try {
     createdMessage.sender = sender.username;
+    createdMessage.user = sender;
     await createdMessage.save();
     const getChannel = await Channel.findById(channelid);
     getChannel.messages.push(createdMessage);
@@ -301,6 +306,27 @@ const joinServer = async (req, res, next) => {
   // res.redirect(`/me/${server._id}`);
 };
 
+const getMessages = async (req, res, next) => {
+  try {
+    const cid = req.params.cid;
+    const channel = await Channel.findById(cid).populate("messages");
+    // populate channel messages user
+    const messages = channel.messages;
+    // messages.forEach(async (message) => {
+    //   message.populate("user");
+    // });
+    res.status(201).json({ messages: channel.messages });
+  } catch (err) {
+    console.log(err);
+    const error = new HTTPError(
+      "Fetching messages failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+};
+
+exports.getMessages = getMessages;
 exports.joinServer = joinServer;
 exports.createMessage = createMessage;
 exports.createChannel = createChannel;

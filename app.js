@@ -9,6 +9,30 @@ const HTTPError = require("./backend/models/HTTPError");
 const session = require("express-session");
 const path = require("path");
 const mime = require("mime");
+const socketIO = require("socket.io");
+
+const server = app.listen(5500);
+
+const io = socketIO(server);
+io.on("connection", (socket) => {
+  console.log(`New client connected here ${socket.id}`);
+  // socket.on("disconnect", () => {
+  //   console.log("Client disconnected");
+  // });
+  // socket.on("message", (data) => {
+  //   console.log(`Message received: ${data}`);
+  // });
+  // socket.broadcast.emit("message", data);
+  socket.on("newMessage", (message) => {
+    const channelid = message.message.channelid;
+    socket.broadcast.emit("receiveMessage", message);
+  });
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -61,10 +85,9 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://tempmail1289749:dkte123@cluster0.wdduehx.mongodb.net/DiscordClone"
+    "mongodb+srv://tempmail1289749:dkte123@cluster0.wdduehx.mongodb.net/TestNew"
   )
   .then(() => {
-    app.listen(5500);
     console.log("Connected to MongoDB");
   })
   .catch((err) => console.log(err));

@@ -41,4 +41,5 @@ router.get("/register/", UserController.getRegisterPage);
 
 router.post("/joinserver/", UserController.joinServer);
 
+router.get("/getmessages/:cid", UserController.getMessages);
 module.exports = router;
