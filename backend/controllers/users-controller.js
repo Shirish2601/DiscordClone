@@ -58,7 +58,7 @@ const registerUser = async (req, res, next) => {
     );
     return next(error);
   }
-  const { username, email, password, image } = req.body;
+  const { username, email, password } = req.body;
   let exists = await checkIfUserAlreadyExists(email);
   if (exists) {
     const error = new HTTPError(
@@ -73,7 +73,6 @@ const registerUser = async (req, res, next) => {
     email,
     password,
     discriminator: discrim,
-    image,
   });
 
   try {
