@@ -101,26 +101,29 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new HTTPError(
-      "Invalid inputs passed, please check your data.",
-      422
-    );
-    return next(error);
+    // const error = new HTTPError(
+    //   "Invalid inputs passed, please check your data.",
+    //   422
+    // );
+    // return next(error);
+    return res.redirect("/login");
   }
   const { email, password } = req.body;
   let user;
   try {
     user = await User.findOne({ email: email });
   } catch (err) {
-    const error = new HTTPError(
-      "Logging in failed, please try again later.",
-      500
-    );
-    return next(error);
+    // const error = new HTTPError(
+    //   "Logging in failed, please try again later.",
+    //   500
+    // );
+    // return next(error);
+    return res.redirect("/login");
   }
   if (!user || user.password !== password) {
-    const error = new HTTPError("Incorrect Password, please try again.", 401);
-    return next(error);
+    // const error = new HTTPError("Incorrect Password, please try again.", 401);
+    // return next(error);
+    return res.redirect("/login");
   }
   req.session.user = user;
   res.redirect("/me");

@@ -15,9 +15,15 @@ btn.addEventListener("click", async (e) => {
         password,
       }),
     });
+
     if (!response.ok) {
-      throw new Error("Login failed!");
+      email.value = "";
+      password.value = "";
+      const alertHTML = ``;
+      document.body.insertAdjacentHTML;
     } else {
+      email.value = "";
+      password.value = "";
       window.location.href = "/me/";
     }
   } catch (err) {
