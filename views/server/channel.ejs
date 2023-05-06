@@ -21,6 +21,7 @@
     <script defer src="/js/addchannel.js"></script>
     <script defer src="/js/serverhandler.js"></script>
     <script defer src="/js/leaveserver.js"></script>
+    <script defer src="/js/logout.js"></script>
 
     <link
       rel="stylesheet"
@@ -197,9 +198,12 @@
               <h1><%= user.username %></h1>
               <p>#<%= user.discriminator %></p>
             </div>
-            <a href="">
+            <div>
               <i class="fa-solid fa-gear settings_icon"></i>
-            </a>
+            </div>
+            <div class="user_dropdown hidden">
+              <div class="user_dropdown-content logout">Logout</div>
+            </div>
           </div>
         </div>
       </div>

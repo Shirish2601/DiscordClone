@@ -36,6 +36,7 @@ router.post(
 );
 
 router.delete("/:sid/leaveserver", UserController.leaveServer);
+router.post("/logout/", UserController.logoutUser);
 
 router.post("/joinserver", UserController.joinServer);
 

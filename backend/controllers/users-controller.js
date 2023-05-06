@@ -347,6 +347,12 @@ const leaveServer = async (req, res, next) => {
   }
 };
 
+const logoutUser = async (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/login/");
+};
+
+exports.logoutUser = logoutUser;
 exports.leaveServer = leaveServer;
 exports.getMessages = getMessages;
 exports.joinServer = joinServer;

@@ -10,6 +10,7 @@ const session = require("express-session");
 const path = require("path");
 const mime = require("mime");
 const socketIO = require("socket.io");
+const flash = require("connect-flash");
 
 const server = app.listen(5500);
 
@@ -24,13 +25,18 @@ io.on("connection", (socket) => {
   // });
   // socket.broadcast.emit("message", data);
   socket.on("newMessage", (message) => {
-    const channelid = message.message.channelid;
     socket.broadcast.emit("receiveMessage", message);
   });
 });
 
 app.use((req, res, next) => {
   req.io = io;
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
 

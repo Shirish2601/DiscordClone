@@ -242,3 +242,27 @@ img.status {
 .dropdown-server-content.anchor a {
   color: white;
 }
+
+.user_dropdown {
+  width: 90px;
+  position: absolute;
+  left: 120;
+  bottom: 70;
+  background-color: #1e1f22;
+  box-shadow: 0 0 1px 1px #1e1f22;
+  padding: 10px 10px;
+}
+.logout {
+  text-align: center;
+  padding: 5px 5px;
+  cursor: pointer;
+  color: #f23f42;
+  background-color: #1e1f22;
+  font-weight: 500;
+  font-size: 14px;
+}
+.logout:hover {
+  transition: 0.3s;
+  background-color: #f23f42;
+  color: white;
+}
