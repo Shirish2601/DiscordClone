@@ -118,7 +118,7 @@ addServerButton.addEventListener("click", async (e) => {
 
   popup.classList.add("popup");
   try {
-    const response = await fetch("http://localhost:5500/getpopup", {
+    const response = await fetch("http://localhost:5500/server/getpopup", {
       method: "GET",
       headers: {
         "Content-Type": "text/html",

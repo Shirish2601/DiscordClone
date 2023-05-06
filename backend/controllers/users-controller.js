@@ -101,29 +101,24 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new HTTPError(
-      "Invalid inputs passed, please check your data.",
-      422
-    );
-    return next(error);
+    req.flash("error", "Invalid Email");
+    return res.redirect("/login");
   }
   const { email, password } = req.body;
   let user;
   try {
     user = await User.findOne({ email: email });
   } catch (err) {
-    const error = new HTTPError(
-      "Logging in failed, please try again later.",
-      500
-    );
-    return next(error);
+    req.flash("error", "Incorrect Email or Password, please try again.");
+    return res.redirect("/login");
   }
   if (!user || user.password !== password) {
-    const error = new HTTPError("Incorrect Password, please try again.", 401);
-    return next(error);
+    req.flash("error", "Incorrect Email or Password, please try again.");
+    return res.redirect("/login");
   }
   req.session.user = user;
-  res.redirect("/me");
+  req.flash("success", "Logged in successfully");
+  return res.redirect("/me");
 };
 
 const getLoginPage = async (req, res, next) => {
@@ -340,7 +335,7 @@ const leaveServer = async (req, res, next) => {
       server.members.splice(index, 1);
     }
     await server.save();
-    res.redirect("/me");
+    res.redirect("/me/");
   } else if (server.members.length == 1) {
     await server.deleteOne(server._id);
     res.redirect("/me/");

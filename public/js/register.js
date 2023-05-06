@@ -10,7 +10,6 @@ button.addEventListener("click", async (e) => {
   userName = userName.trim();
   userPassword = userPassword.trim();
   userEmail = userEmail.trim();
-  console.log(userName, userPassword, userEmail);
   try {
     const response = await fetch("http://localhost:5500/register", {
       method: "POST",

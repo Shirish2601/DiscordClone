@@ -23,7 +23,7 @@ addChannelIcon.addEventListener("click", async (e) => {
   popup.classList.add("popup");
   try {
     const response = await fetch(
-      "http://localhost:5500/getpopupcreatechannel",
+      "http://localhost:5500/server/getpopupcreatechannel",
       {
         method: "GET",
         headers: {
@@ -50,7 +50,6 @@ addChannelIcon.addEventListener("click", async (e) => {
 
     const createChannelBtn = document.querySelector(".create_channel");
     createChannelBtn.addEventListener("click", async (e) => {
-      console.log("clicked");
       e.preventDefault();
       e.stopImmediatePropagation();
 
@@ -89,7 +88,6 @@ addChannelIcon.addEventListener("click", async (e) => {
           body: JSON.stringify({ name: channelName, serverid }),
         });
         const data = await response.json();
-        console.log(data);
 
         const html = `<div tabindex="-1" id="scripted" class="channel">
 <svg

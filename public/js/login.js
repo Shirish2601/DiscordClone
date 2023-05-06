@@ -16,7 +16,7 @@ btn.addEventListener("click", async (e) => {
       }),
     });
     if (!response.ok) {
-      throw new Error("Login failed!");
+      window.location.href = "/login/";
     } else {
       window.location.href = "/me/";
     }

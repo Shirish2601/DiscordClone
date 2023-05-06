@@ -34,12 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  next();
-});
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
@@ -49,6 +43,7 @@ app.use(
     secret: "secret",
     resave: false,
     saveUninitialized: false,
+    cookie: { maxAge: 60000 },
   })
 );
 app.use(
@@ -62,7 +57,13 @@ app.use(
   })
 );
 
-app.use("/", userRoutes);
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -73,7 +74,9 @@ app.use("/", userRoutes);
 //   res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PATCH");
 //   next();
 // });
-app.use(routes);
+app.use("/server/", routes);
+app.use("/", userRoutes);
+app.get("/favicon.ico", (req, res) => res.status(204));
 app.use(express.static(path.join(__dirname, "public")));
 
 // app.use((req, res, next) => {
