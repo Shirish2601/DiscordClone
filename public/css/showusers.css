@@ -15,6 +15,15 @@
 .show-users__info--profile {
   color: white;
 }
+.display-discrim {
+  display: inline-block;
+  opacity: 0.8;
+  font-size: 12px;
+}
+.display-name {
+  display: inline-block;
+  font-weight: 500;
+}
 .show-users__info {
   opacity: 0.7;
 

@@ -58,6 +58,7 @@ const registerUser = async (req, res, next) => {
     );
     return next(error);
   }
+  let url = "https://api.dicebear.com/6.x/big-smile/svg";
   const { username, email, password } = req.body;
   let exists = await checkIfUserAlreadyExists(email);
   if (exists) {
@@ -76,6 +77,10 @@ const registerUser = async (req, res, next) => {
   });
 
   try {
+    await createdUser.save();
+    const id = createdUser._id;
+    url = url + `?seed=${id}` + "&backgroundColor=ecf0f1,f1c40f,3498db";
+    createdUser.image = url;
     await createdUser.save();
   } catch (err) {
     console.log(err);
@@ -325,6 +330,24 @@ const getMessages = async (req, res, next) => {
   }
 };
 
+const leaveServer = async (req, res, next) => {
+  const user = req.session.user;
+  const sid = req.params.sid;
+  const server = await Server.findById(sid);
+  if (server.members.length > 1) {
+    const index = server.members.indexOf(user._id);
+    if (index > -1) {
+      server.members.splice(index, 1);
+    }
+    await server.save();
+    res.redirect("/me");
+  } else if (server.members.length == 1) {
+    await server.deleteOne(server._id);
+    res.redirect("/me/");
+  }
+};
+
+exports.leaveServer = leaveServer;
 exports.getMessages = getMessages;
 exports.joinServer = joinServer;
 exports.createMessage = createMessage;

@@ -91,8 +91,8 @@
           <div class="dropdown-server-content">
             <p>Invite Code &nbsp;&nbsp;<%= server.joincode %></p>
           </div>
-          <div class="dropdown-server-content anchor">
-            <a href="#" class="leave-server">Leave Server</a>
+          <div class="dropdown-server-content anchor leaveserver">
+            Leave Server
           </div>
         </div>
         <div class="chgtfgF">
@@ -251,9 +251,8 @@
             <img src="<%= member.image %>" alt="profileimage" />
           </div>
           <div class="show-users__info--profile">
-            <span
-              ><%= member.username %>&nbsp; #<%= member.discriminator %></span
-            >
+            <span class="display-name"><%= member.username %>&nbsp; </span>
+            <span class="display-discrim"> #<%= member.discriminator %></span>
           </div>
         </div>
         <% }) %>

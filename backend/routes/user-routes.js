@@ -35,6 +35,8 @@ router.post(
   UserController.registerUser
 );
 
+router.delete("/:sid/leaveserver", UserController.leaveServer);
+
 router.post("/joinserver", UserController.joinServer);
 
 router.get("/register/", UserController.getRegisterPage);

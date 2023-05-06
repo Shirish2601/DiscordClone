@@ -223,6 +223,9 @@ img.status {
 .dropdown-server-content {
   padding: 10px 10px;
 }
+.leaveserver {
+  cursor: pointer;
+}
 .dropdown-server-content:hover {
   background-color: #36383e;
   transition: 0.3s;
@@ -230,10 +233,6 @@ img.status {
 .down_icon {
   position: absolute;
   left: 200px;
-}
-.leave-server {
-  text-decoration: none;
-  color: #f23f42;
 }
 .dropdown-server-content.anchor:hover {
   color: white;

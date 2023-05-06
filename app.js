@@ -85,7 +85,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://tempmail1289749:dkte123@cluster0.wdduehx.mongodb.net/TestNew"
+    "mongodb+srv://tempmail1289749:dkte123@cluster0.wdduehx.mongodb.net/FinalTest"
   )
   .then(() => {
     console.log("Connected to MongoDB");
