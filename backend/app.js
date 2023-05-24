@@ -12,7 +12,7 @@ const mime = require("mime");
 const socketIO = require("socket.io");
 const dotenv = require("dotenv");
 
-const server = app.listen(5500);
+const server = app.listen(process.env.PORT || 5500);
 
 const io = socketIO(server);
 io.on("connection", (socket) => {
