@@ -113,6 +113,7 @@ socket.on("receiveMessage", (message) => {
   }
 });
 
+const SERVERURL = process.env.SERVERURL;
 textarea.addEventListener("keypress", async (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
@@ -123,7 +124,7 @@ textarea.addEventListener("keypress", async (e) => {
     const url = window.location.href;
     const channelid = url.split("/")[5];
     try {
-      const response = await fetch("http://localhost:5500/createmessage", {
+      const response = await fetch(`${SERVERURL}/createmessage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

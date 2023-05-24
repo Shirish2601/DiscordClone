@@ -11,6 +11,7 @@
 //     });
 //   });
 // });
+const SERVERURL = process.env.SERVERURL;
 
 const addServerButton = document.querySelector(".add-icon-btn");
 const servers = document.querySelectorAll(".btn-server-image");
@@ -23,7 +24,7 @@ const popupRemover = (discordContainer, popup) => {
   discordContainer.style.cssText = "opacity: 1";
   if (popup) popup.remove();
   const cssLinkTag = document.querySelector(
-    "link[href='http://localhost:5500/getpopup.css']"
+    `link[href="${SERVERURL}/getpopup.css"]`
   );
   if (cssLinkTag) cssLinkTag.remove();
 };
@@ -45,7 +46,7 @@ const linkChecker = (link) => {
 //   popup.classList.add("popup");
 //   try {
 //     const response = await fetch(
-//       "http://localhost:5500/getpopupcreatechannel",
+//       "${SERVERURL}getpopupcreatechannel",
 //       {
 //         method: "GET",
 //         headers: {
@@ -118,7 +119,7 @@ addServerButton.addEventListener("click", async (e) => {
 
   popup.classList.add("popup");
   try {
-    const response = await fetch("http://localhost:5500/getpopup", {
+    const response = await fetch(`${SERVERURL}/getpopup`, {
       method: "GET",
       headers: {
         "Content-Type": "text/html",
@@ -166,7 +167,7 @@ addServerButton.addEventListener("click", async (e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
         const joincode = document.querySelector(".invite-code__input").value;
-        const response = await fetch("http://localhost:5500/joinserver", {
+        const response = await fetch(`${SERVERURL}/joinserver`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -227,7 +228,7 @@ addServerButton.addEventListener("click", async (e) => {
         }
 
         if (serverImageUrl && serverName) {
-          const responseServer = await fetch("http://localhost:5500/me", {
+          const responseServer = await fetch(`${SERVERURL}/me`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -267,11 +268,11 @@ addServerButton.addEventListener("click", async (e) => {
 
 // const getChannels = async () => {
 //   const linkAlreadyExists = document.querySelector(
-//     "link[href='http://localhost:5500/channels/']"
+//     "link[href='${SERVERURL}channels/']"
 //   );
 //   if (linkAlreadyExists) linkAlreadyExists.remove();
 
-//   const response = await fetch("http://localhost:5500/channels/2/1", {
+//   const response = await fetch("${SERVERURL}channels/2/1", {
 //     method: "GET",
 //     headers: {
 //       "Content-Type": "text/html",
@@ -279,7 +280,7 @@ addServerButton.addEventListener("click", async (e) => {
 //   });
 //   discordContainer.insertAdjacentHTML("beforeend", await response.text());
 
-//   const link = `<link rel="stylesheet" href="http://localhost:5500/channels/">`;
+//   const link = `<link rel="stylesheet" href="${SERVERURL}channels/">`;
 //   document.head.insertAdjacentHTML("beforeend", link);
 // };
 
@@ -305,15 +306,15 @@ addServerButton.addEventListener("click", async (e) => {
 //     if (btnServerImage) {
 //       e.preventDefault();
 //       e.stopImmediatePropagation();
-//       const response = await fetch("http://localhost:5500/gettextarea", {
+//       const response = await fetch("${SERVERURL}gettextarea", {
 //         method: "GET",
 //         headers: {
 //           "Content-Type": "text/html",
 //         },
 //       });
 //       const data = await response.text();
-//       const link = `<link rel="stylesheet" href="http://localhost:5500/gettextarea.css">`;
-//       if (linkChecker("link[href='http://localhost:5500/gettextarea.css']"))
+//       const link = `<link rel="stylesheet" href="${SERVERURL}gettextarea.css">`;
+//       if (linkChecker("link[href='${SERVERURL}gettextarea.css']"))
 //         link.remove();
 
 //       document.head.insertAdjacentHTML("beforeend", link);
@@ -373,7 +374,7 @@ addServerButton.addEventListener("click", async (e) => {
 //     server.addEventListener("load", async () => {
 //       if (serverCreated) {
 //         alert("Server created successfully");
-//         const response = await fetch("http://localhost:5500/channels/2/1", {
+//         const response = await fetch("${SERVERURL}channels/2/1", {
 //           method: "GET",
 //           headers: {
 //             "Content-Type": "text/html",

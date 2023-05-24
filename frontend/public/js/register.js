@@ -1,4 +1,5 @@
 const button = document.querySelector(".btn");
+const SERVERURL = process.env.SERVERURL;
 button.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -13,7 +14,7 @@ button.addEventListener("click", async (e) => {
   userPassword = userPassword.trim();
   userEmail = userEmail.trim();
   try {
-    const response = await fetch("http://localhost:5500/register", {
+    const response = await fetch(`${SERVERURL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,10 +1,9 @@
+const SERVERURL = process.env.SERVERURL;
 const popupRemover = (discordContainer, popup) => {
   discordContainer.style.cssText = "opacity: 1";
 
   if (popup) popup.remove();
-  const cssLinkTag = document.querySelector(
-    "link[href='http://localhost:5500/getpopup.css']"
-  );
+  const cssLinkTag = document.querySelector("link[href='${SE}/getpopup.css']");
 
   if (cssLinkTag) cssLinkTag.remove();
 };
@@ -22,15 +21,12 @@ addChannelIcon.addEventListener("click", async (e) => {
 
   popup.classList.add("popup");
   try {
-    const response = await fetch(
-      "http://localhost:5500/getpopupcreatechannel",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "text/html",
-        },
-      }
-    );
+    const response = await fetch(`${SERVERURL}/getpopupcreatechannel`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "text/html",
+      },
+    });
 
     const data = await response.text();
     popup.innerHTML = data;
@@ -81,7 +77,7 @@ addChannelIcon.addEventListener("click", async (e) => {
       const serverid = url.split("/")[4];
 
       try {
-        const response = await fetch("http://localhost:5500/createchannel", {
+        const response = await fetch(`${SERVERURL}/createchannel`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
