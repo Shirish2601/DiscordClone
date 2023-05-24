@@ -10,19 +10,14 @@ const session = require("express-session");
 const path = require("path");
 const mime = require("mime");
 const socketIO = require("socket.io");
+const dotenv = require("dotenv");
 
 const server = app.listen(5500);
 
 const io = socketIO(server);
 io.on("connection", (socket) => {
   console.log(`New client connected here ${socket.id}`);
-  // socket.on("disconnect", () => {
-  //   console.log("Client disconnected");
-  // });
-  // socket.on("message", (data) => {
-  //   console.log(`Message received: ${data}`);
-  // });
-  // socket.broadcast.emit("message", data);
+
   socket.on("newMessage", (message) => {
     socket.broadcast.emit("receiveMessage", message);
   });
@@ -57,22 +52,8 @@ app.use(
 
 app.use("/", userRoutes);
 
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-//   );
-//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PATCH");
-//   next();
-// });
 app.use(routes);
 app.use(express.static(path.join(__dirname, "public")));
-
-// app.use((req, res, next) => {
-//   const error = new HTTPError("Could not find this route", 404);
-//   throw error;
-// });
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
@@ -83,24 +64,8 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://tempmail1289749:dkte123@cluster0.wdduehx.mongodb.net/FinalTest"
-  )
+  .connect(dotenv.config().parsed.URL)
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((err) => console.log(err));
-
-// const User = require("./models/user");
-// const getUsers = (req, res, next) => {
-//   User.find()
-//     .then((users) => {
-//       console.log(users);
-//       users.map((user) => {
-//         console.log(user._id.toString());
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };

@@ -54,11 +54,11 @@ button.addEventListener("click", async (e) => {
         $(".alert").css("opacity", 1);
 
         setTimeout(function () {
-          $(".alert").fadeOut(300, function () {
+          $(".alert").fadeOut(700, function () {
             $(this).remove();
             window.location.href = "/me/";
           });
-        }, 400);
+        }, 600);
       });
       window.location.href = "/me/";
     }

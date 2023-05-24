@@ -3,8 +3,6 @@ const router = express.Router();
 const UserController = require("../controllers/users-controller");
 const { check } = require("express-validator");
 
-// router.get("/:uid", UserController.getUserById);
-
 router.get("/", UserController.getHomePage);
 
 router.get("/me/:sid/:cid", UserController.getChannelById);
