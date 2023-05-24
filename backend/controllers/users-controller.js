@@ -6,7 +6,7 @@ const Channel = require("../models/channel");
 const Message = require("../models/message");
 const path = require("path");
 
-const VIEWS_PATH = path.join(__dirname, "../../", "views");
+const VIEWS_PATH = path.join(__dirname, "../../", "/frontend/views");
 
 const generateJoinCode = () => {
   let code = "";

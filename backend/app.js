@@ -1,11 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const routes = require("./backend/routes/server-routes");
-const userRoutes = require("./backend/routes/user-routes");
+const routes = require("./routes/server-routes");
+const userRoutes = require("./routes/user-routes");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const HTTPError = require("./backend/models/HTTPError");
+const HTTPError = require("./models/HTTPError");
 const session = require("express-session");
 const path = require("path");
 const mime = require("mime");
@@ -29,7 +29,8 @@ app.use((req, res, next) => {
 });
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+// console.log(path.join(__dirname, "../frontend/views"));
+app.set("views", path.join(__dirname, "../frontend/views"));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(
@@ -53,7 +54,8 @@ app.use(
 app.use("/", userRoutes);
 
 app.use(routes);
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../", "frontend/public")));
+console.log(path.join(__dirname, "../", "frontend/public"));
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {

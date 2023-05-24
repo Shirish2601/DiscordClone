@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const path = require("path");
-const VIEWS_PATH = path.join(__dirname, "../../", "views");
+const VIEWS_PATH = path.join(__dirname, "../../", "/frontend/views");
 
 router.get("/getpopup", (req, res, next) => {
   res.set("Content-Type", "text/html");
