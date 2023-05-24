@@ -1,5 +1,5 @@
 const button = document.querySelector(".btn");
-const SERVERURL = process.env.SERVERURL;
+const SERVERURL = "https://discordbackend.onrender.com";
 button.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();

@@ -1,4 +1,6 @@
 const textarea = document.querySelector("#msgarea");
+const SERVERURL = "https://discordbackend.onrender.com";
+
 // const messagesContainer = document.querySelector(".channel_msg-wrapper");
 
 // const updateMessages = async () => {
@@ -78,7 +80,7 @@ const textarea = document.querySelector("#msgarea");
 //   }
 // };
 // messagesContainer.addEventListener("input", udpateMessages);
-const socket = io("http://localhost:5500");
+const socket = io(`${SERVERURL}`);
 
 textarea.addEventListener("input", () => {
   textarea.style.height = "auto";
@@ -113,7 +115,6 @@ socket.on("receiveMessage", (message) => {
   }
 });
 
-const SERVERURL = process.env.SERVERURL;
 textarea.addEventListener("keypress", async (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();

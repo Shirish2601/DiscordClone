@@ -11,7 +11,7 @@
 //     });
 //   });
 // });
-const SERVERURL = process.env.SERVERURL;
+const SERVERURL = "https://discordbackend.onrender.com";
 
 const addServerButton = document.querySelector(".add-icon-btn");
 const servers = document.querySelectorAll(".btn-server-image");

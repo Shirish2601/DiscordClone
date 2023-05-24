@@ -1,4 +1,4 @@
-const SERVERURL = process.env.SERVERURL;
+const SERVERURL = "https://discordbackend.onrender.com";
 const popupRemover = (discordContainer, popup) => {
   discordContainer.style.cssText = "opacity: 1";
 

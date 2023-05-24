@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.1",
+    "webpack-cli": "^5.1.1"
+  },
+  "scripts": {
+    "dev": "webpack -d --watch",
+    "prod": "webpack -p"
+  }
+}

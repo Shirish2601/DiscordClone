@@ -1,5 +1,5 @@
 const leaveServerBtn = document.querySelector(".leaveserver");
-const SERVERURL = process.env.SERVERURL;
+const SERVERURL = "https://discordbackend.onrender.com";
 
 leaveServerBtn.addEventListener("click", async (e) => {
   e.preventDefault();

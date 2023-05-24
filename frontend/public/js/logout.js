@@ -9,7 +9,7 @@ settingsBtn.addEventListener("click", async (e) => {
   userDropDown.classList.toggle("hidden");
 });
 
-const SERVERURL = process.env.SERVERURL;
+const SERVERURL = "https://discordbackend.onrender.com";
 
 logoutBtn.addEventListener("click", async (e) => {
   e.preventDefault();
