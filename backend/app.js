@@ -65,8 +65,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  // .connect(process.env.MONGOURL)
-  .connect(dotenv.config().parsed.MONGOURL)
+  .connect(process.env.MONGOURL)
   .then(() => {
     console.log("Connected to MongoDB");
   })
