@@ -1,5 +1,4 @@
 const textarea = document.querySelector("#msgarea");
-const SERVERURL = "https://discordbackend.onrender.com";
 
 // const messagesContainer = document.querySelector(".channel_msg-wrapper");
 
@@ -80,7 +79,7 @@ const SERVERURL = "https://discordbackend.onrender.com";
 //   }
 // };
 // messagesContainer.addEventListener("input", udpateMessages);
-const socket = io(`${SERVERURL}`);
+const socket = io(`http://localhost:5500`);
 
 textarea.addEventListener("input", () => {
   textarea.style.height = "auto";
@@ -125,7 +124,7 @@ textarea.addEventListener("keypress", async (e) => {
     const url = window.location.href;
     const channelid = url.split("/")[5];
     try {
-      const response = await fetch(`${SERVERURL}/createmessage`, {
+      const response = await fetch(`http://localhost:5500/createmessage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

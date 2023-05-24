@@ -9,12 +9,10 @@ settingsBtn.addEventListener("click", async (e) => {
   userDropDown.classList.toggle("hidden");
 });
 
-const SERVERURL = "https://discordbackend.onrender.com";
-
 logoutBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
-  const response = await fetch(`${SERVERURL}/logout/`, {
+  const response = await fetch(`http://localhost:5500/logout/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });

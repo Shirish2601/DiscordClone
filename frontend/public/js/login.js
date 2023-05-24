@@ -1,5 +1,4 @@
 const btn = document.querySelector(".btn");
-const SERVERURL = "https://discordbackend.onrender.com";
 btn.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -8,7 +7,7 @@ btn.addEventListener("click", async (e) => {
   const emailContainer = document.querySelector(".passwdval");
   const passwordContainer = document.querySelector(".passwdval");
   try {
-    const response = await fetch(`${SERVERURL}/login`, {
+    const response = await fetch(`http://localhost:5500/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
