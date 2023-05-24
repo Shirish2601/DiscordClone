@@ -7,16 +7,19 @@ btn.addEventListener("click", async (e) => {
   const emailContainer = document.querySelector(".passwdval");
   const passwordContainer = document.querySelector(".passwdval");
   try {
-    const response = await fetch(`http://localhost:5500/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    const response = await fetch(
+      `https://discordbackend-ymru.onrender.com/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();

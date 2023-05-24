@@ -6,7 +6,7 @@ const textarea = document.querySelector("#msgarea");
 //   const url = window.location.href;
 //   const channelid = url.split("/")[5];
 //   const response = await fetch(
-//     `http://localhost:5500/getmessages/${channelid}`,
+//     `https://discordbackend-ymru.onrender.com/getmessages/${channelid}`,
 //     {
 //       method: "GET",
 //       headers: {
@@ -46,7 +46,7 @@ const textarea = document.querySelector("#msgarea");
 //   const url = window.location.href;
 //   const channelid = url.split("/")[5];
 //   const response = await fetch(
-//     `http://localhost:5500/getmessages/${channelid}`,
+//     `https://discordbackend-ymru.onrender.com/getmessages/${channelid}`,
 //     {
 //       method: "GET",
 //       headers: {
@@ -79,7 +79,7 @@ const textarea = document.querySelector("#msgarea");
 //   }
 // };
 // messagesContainer.addEventListener("input", udpateMessages);
-const socket = io(`http://localhost:5500`);
+const socket = io(`https://discordbackend-ymru.onrender.com`);
 
 textarea.addEventListener("input", () => {
   textarea.style.height = "auto";
@@ -124,16 +124,19 @@ textarea.addEventListener("keypress", async (e) => {
     const url = window.location.href;
     const channelid = url.split("/")[5];
     try {
-      const response = await fetch(`http://localhost:5500/createmessage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: msg,
-          channelid: channelid,
-        }),
-      });
+      const response = await fetch(
+        `https://discordbackend-ymru.onrender.com/createmessage`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: msg,
+            channelid: channelid,
+          }),
+        }
+      );
 
       const data = await response.json();
       const messageContainer = document.querySelector(".channel_msg-wrapper");

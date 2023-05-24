@@ -13,17 +13,20 @@ button.addEventListener("click", async (e) => {
   userPassword = userPassword.trim();
   userEmail = userEmail.trim();
   try {
-    const response = await fetch(`http://localhost:5500/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: userName,
-        password: userPassword,
-        email: userEmail,
-      }),
-    });
+    const response = await fetch(
+      `https://discordbackend-ymru.onrender.com/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: userName,
+          password: userPassword,
+          email: userEmail,
+        }),
+      }
+    );
     document.querySelector(".nameval").value = "";
     document.querySelector(".passwdval").value = "";
     document.querySelector(".emailval").value = "";

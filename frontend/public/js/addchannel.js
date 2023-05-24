@@ -21,7 +21,7 @@ addChannelIcon.addEventListener("click", async (e) => {
   popup.classList.add("popup");
   try {
     const response = await fetch(
-      `http://localhost:5500/getpopupcreatechannel`,
+      `https://discordbackend-ymru.onrender.com/getpopupcreatechannel`,
       {
         method: "GET",
         headers: {
@@ -79,13 +79,16 @@ addChannelIcon.addEventListener("click", async (e) => {
       const serverid = url.split("/")[4];
 
       try {
-        const response = await fetch(`http://localhost:5500/createchannel`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: channelName, serverid }),
-        });
+        const response = await fetch(
+          `https://discordbackend-ymru.onrender.com/createchannel`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: channelName, serverid }),
+          }
+        );
         const data = await response.json();
         console.log(data);
 

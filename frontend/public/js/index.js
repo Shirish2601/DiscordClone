@@ -23,7 +23,7 @@ const popupRemover = (discordContainer, popup) => {
   discordContainer.style.cssText = "opacity: 1";
   if (popup) popup.remove();
   const cssLinkTag = document.querySelector(
-    `link[href="http://localhost:5500/getpopup.css"]`
+    `link[href="https://discordbackend-ymru.onrender.com/getpopup.css"]`
   );
   if (cssLinkTag) cssLinkTag.remove();
 };
@@ -45,7 +45,7 @@ const linkChecker = (link) => {
 //   popup.classList.add("popup");
 //   try {
 //     const response = await fetch(
-//       "http://localhost:5500getpopupcreatechannel",
+//       "https://discordbackend-ymru.onrender.comgetpopupcreatechannel",
 //       {
 //         method: "GET",
 //         headers: {
@@ -118,12 +118,15 @@ addServerButton.addEventListener("click", async (e) => {
 
   popup.classList.add("popup");
   try {
-    const response = await fetch(`http://localhost:5500/getpopup`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "text/html",
-      },
-    });
+    const response = await fetch(
+      `https://discordbackend-ymru.onrender.com/getpopup`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/html",
+        },
+      }
+    );
 
     const data = await response.text();
     popup.innerHTML = data;
@@ -166,13 +169,16 @@ addServerButton.addEventListener("click", async (e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
         const joincode = document.querySelector(".invite-code__input").value;
-        const response = await fetch(`http://localhost:5500/joinserver`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ joincode }),
-        });
+        const response = await fetch(
+          `https://discordbackend-ymru.onrender.com/joinserver`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ joincode }),
+          }
+        );
         const data = await response.json();
         if (!response.ok) {
           alert("Invalid code");
@@ -227,16 +233,19 @@ addServerButton.addEventListener("click", async (e) => {
         }
 
         if (serverImageUrl && serverName) {
-          const responseServer = await fetch(`http://localhost:5500/me`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              servername: serverName,
-              image: serverImageUrl,
-            }),
-          });
+          const responseServer = await fetch(
+            `https://discordbackend-ymru.onrender.com/me`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                servername: serverName,
+                image: serverImageUrl,
+              }),
+            }
+          );
 
           const data = await responseServer.json();
 
@@ -267,11 +276,11 @@ addServerButton.addEventListener("click", async (e) => {
 
 // const getChannels = async () => {
 //   const linkAlreadyExists = document.querySelector(
-//     "link[href='http://localhost:5500channels/']"
+//     "link[href='https://discordbackend-ymru.onrender.comchannels/']"
 //   );
 //   if (linkAlreadyExists) linkAlreadyExists.remove();
 
-//   const response = await fetch("http://localhost:5500channels/2/1", {
+//   const response = await fetch("https://discordbackend-ymru.onrender.comchannels/2/1", {
 //     method: "GET",
 //     headers: {
 //       "Content-Type": "text/html",
@@ -279,7 +288,7 @@ addServerButton.addEventListener("click", async (e) => {
 //   });
 //   discordContainer.insertAdjacentHTML("beforeend", await response.text());
 
-//   const link = `<link rel="stylesheet" href="http://localhost:5500channels/">`;
+//   const link = `<link rel="stylesheet" href="https://discordbackend-ymru.onrender.comchannels/">`;
 //   document.head.insertAdjacentHTML("beforeend", link);
 // };
 
@@ -305,15 +314,15 @@ addServerButton.addEventListener("click", async (e) => {
 //     if (btnServerImage) {
 //       e.preventDefault();
 //       e.stopImmediatePropagation();
-//       const response = await fetch("http://localhost:5500gettextarea", {
+//       const response = await fetch("https://discordbackend-ymru.onrender.comgettextarea", {
 //         method: "GET",
 //         headers: {
 //           "Content-Type": "text/html",
 //         },
 //       });
 //       const data = await response.text();
-//       const link = `<link rel="stylesheet" href="http://localhost:5500gettextarea.css">`;
-//       if (linkChecker("link[href='http://localhost:5500gettextarea.css']"))
+//       const link = `<link rel="stylesheet" href="https://discordbackend-ymru.onrender.comgettextarea.css">`;
+//       if (linkChecker("link[href='https://discordbackend-ymru.onrender.comgettextarea.css']"))
 //         link.remove();
 
 //       document.head.insertAdjacentHTML("beforeend", link);
@@ -373,7 +382,7 @@ addServerButton.addEventListener("click", async (e) => {
 //     server.addEventListener("load", async () => {
 //       if (serverCreated) {
 //         alert("Server created successfully");
-//         const response = await fetch("http://localhost:5500channels/2/1", {
+//         const response = await fetch("https://discordbackend-ymru.onrender.comchannels/2/1", {
 //           method: "GET",
 //           headers: {
 //             "Content-Type": "text/html",

@@ -6,7 +6,7 @@ leaveServerBtn.addEventListener("click", async (e) => {
   const serverid = window.location.href.split("/")[4];
   console.log(serverid);
   const response = await fetch(
-    `http://localhost:5500/${serverid}/leaveserver`,
+    `https://discordbackend-ymru.onrender.com/${serverid}/leaveserver`,
     {
       method: "DELETE",
     }

@@ -12,9 +12,12 @@ settingsBtn.addEventListener("click", async (e) => {
 logoutBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
-  const response = await fetch(`http://localhost:5500/logout/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  });
+  const response = await fetch(
+    `https://discordbackend-ymru.onrender.com/logout/`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
   window.location.href = "/login/";
 });
